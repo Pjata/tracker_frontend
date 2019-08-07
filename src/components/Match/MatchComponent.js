@@ -33,7 +33,7 @@ const MatchComponent = ({
   clipIndex,
   setClipIndex
 }) => {
-  const { matchData, eventData } = data
+  const { events, ...matchData } = data
   const playerRef = useRef()
   const eventsRef = useRef()
 
@@ -90,7 +90,7 @@ const MatchComponent = ({
               onSelectRows={setSelectedRows}
               selectedRows={selectedRows}
               seekAndPlayAll={seekAndPlayAll}
-              data={eventData}
+              data={events}
             />
           </CenteredBox>
         </Grid>

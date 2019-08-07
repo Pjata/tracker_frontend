@@ -26,10 +26,10 @@ const Container = styled(Box)({
   padding: "24px"
 })
 
-const TeamCard = ({ name, logo, id }) => (
+const TeamCard = ({ name, logoUrl, id }) => (
   <Link to={`/app/team/${id}`}>
     <CardStyled>
-      <CardMediaStyled image={logo} />
+      <CardMediaStyled image={logoUrl} />
       <CardContent>
         <CenteredText variant={"h5"}>{name}</CenteredText>
       </CardContent>

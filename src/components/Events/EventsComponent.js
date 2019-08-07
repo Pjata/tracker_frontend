@@ -2,6 +2,8 @@ import React from "react"
 import Table from "../Table/Table"
 import ViewIcon from "@material-ui/icons/RemoveRedEye"
 import IconButton from "@material-ui/core/IconButton"
+import Play from "@material-ui/icons/PlayArrow"
+import { toHHMMSS } from "../../utility"
 const EventsComponent = ({
   data,
   onSelectRows,
@@ -27,11 +29,10 @@ const EventsComponent = ({
       )
     },
     { title: "Típus", field: "type" },
-    { title: "Játékos", field: "player" },
-    { title: "Időpont", field: "time" }
+    { title: "Játékos", field: "player.name" },
+    { title: "Időpont", render: rowData => toHHMMSS(rowData.time) }
   ]
   const onPlayAll = (evt, data) => {
-    console.log(data)
     seekAndPlayAll(data)
   }
   return (
@@ -49,7 +50,7 @@ const EventsComponent = ({
       actions={[
         {
           tooltip: "Kijelölt jelenetek lejátszása",
-          icon: "PlayArrow",
+          icon: Play,
           onClick: onPlayAll
         }
       ]}
