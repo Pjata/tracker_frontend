@@ -1,32 +1,24 @@
 import React from "react"
 import TeamsComponent from "./TeamsComponent"
-import { Query } from "react-apollo"
+import { useQuery } from "@apollo/react-hooks"
 import { gql } from "apollo-boost"
 
-const TeamsQuery = Component => props => (
-  <Query
-    query={gql`
-      {
-        teams {
-          id
-          name
-          logoUrl
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>
-      if (error) return <p>Error</p>
-      return <Component data={data} {...props} />
-    }}
-  </Query>
-)
+const query = gql`
+  {
+    teams {
+      id
+      name
+      logoUrl
+    }
+  }
+`
 
 const TeamsContainer = props => {
-  const {
-    data: { teams }
-  } = props
+  const { loading, error, data } = useQuery(query)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error</p>
+
+  const { teams } = data
   return <TeamsComponent teams={teams} />
 }
-export default TeamsQuery(TeamsContainer)
+export default TeamsContainer
