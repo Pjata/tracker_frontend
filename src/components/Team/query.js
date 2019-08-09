@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost"
 export const query = gql`
-  {
-    team(teamId: "5d43f02a08d1d35013f5b38b") {
+  query Team($teamId: ID!) {
+    team(teamId: $teamId) {
       id
       name
       logoUrl
@@ -20,6 +20,7 @@ export const query = gql`
         name
         number
         id
+        trackerID
       }
     }
   }

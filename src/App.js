@@ -12,6 +12,7 @@ import Teams from "./components/Teams/TeamsContainer"
 import Team from "./components/Team/TeamContainer"
 import Match from "./components/Match/MatchContainer"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
+import TopMenu from "./components/TopMenu/TopMenu"
 
 // A function that routes the user to the right place
 // after login
@@ -34,6 +35,7 @@ function App() {
     >
       <BrowserRouter>
         <div>
+          <TopMenu />
           <Switch>
             <Route exact path={"/"} component={Navbar} />
             <Route exact path={"/app/teams"} component={Teams} />

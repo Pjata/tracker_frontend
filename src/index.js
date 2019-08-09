@@ -6,10 +6,20 @@ import * as serviceWorker from "./serviceWorker"
 import ApolloClient from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
 import client from "./apollo/client"
-
+import { createMuiTheme } from "@material-ui/core/styles"
+import { ThemeProvider } from "@material-ui/styles"
+import { purple } from "@material-ui/core/colors"
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: "#151b44" }, // Purple and green play nicely together.
+    secondary: { main: "#f1c018" } // This is just green.A700 as hex.
+  }
+})
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById("root")
 )
