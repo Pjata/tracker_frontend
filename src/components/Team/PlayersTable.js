@@ -19,7 +19,19 @@ const PlayersTable = ({ data, onRowUpdate, onRowAdd, onRowDelete }) => {
         columns={[
           { title: "Name", field: "name" },
           { title: "Number", field: "number" },
-          { title: "TrackerID", field: "trackerID" }
+          { title: "TrackerID", field: "trackerID" },
+          {
+            title: "Position",
+            field: "position",
+            lookup: {
+              LEFT_WING: "Left wing",
+              CENTER: "Center",
+              RIGHT_WING: "Right wing",
+              LEFT_DEFENDER: "Left defender",
+              RIGHT_DEFENDER: "Right defender",
+              GOALIE: "Goalie"
+            }
+          }
         ]}
         data={data}
         title="Players"

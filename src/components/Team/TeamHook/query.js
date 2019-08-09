@@ -18,6 +18,7 @@ export const query = gql`
       }
       players {
         name
+        position
         number
         id
         trackerID

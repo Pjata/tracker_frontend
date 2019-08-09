@@ -1,46 +1,23 @@
 import React, { useState } from "react"
 import TeamComponent from "./TeamComponent"
-import { useQuery, useMutation } from "@apollo/react-hooks/lib/index"
-import { query } from "./query"
-import {
-  updatePlayerMutation,
-  addPlayerMutation,
-  deletePlayerMutation
-} from "./mutations"
+import useTeamHook from "./TeamHook/useTeamHook"
 const getPlayerInput = playerInput => ({
   name: playerInput.name,
   number: Number(playerInput.number),
-  trackerID: playerInput.trackerID
+  trackerID: playerInput.trackerID,
+  position: playerInput.position
 })
 const TeamContainer = props => {
-  const { loading, error, data } = useQuery(query, {
-    variables: {
-      teamId: props.match.params.id
-    }
-  })
   const [activeModule, setActiveModule] = useState(0)
-  const [updatePlayer] = useMutation(updatePlayerMutation)
-  const [addPlayer] = useMutation(addPlayerMutation, {
-    update: (cache, { data: { addPlayer } }) => {
-      const { team } = cache.readQuery({ query })
-      team.players.push(addPlayer)
-      cache.writeQuery({
-        query,
-        data: { team }
-      })
-    }
-  })
-  const [deletePlayer] = useMutation(deletePlayerMutation, {
-    update: (cache, { data: { deletePlayer } }) => {
-      const { team } = cache.readQuery({ query })
-      team.players = team.players.filter(player => player.id !== deletePlayer)
-      cache.writeQuery({
-        query,
-        data: { team }
-      })
-    }
-  })
-
+  console.log(props.match.params.id)
+  const [
+    loading,
+    error,
+    data,
+    updatePlayer,
+    addPlayer,
+    deletePlayer
+  ] = useTeamHook(props.match.params.id)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   const { team } = data
