@@ -61,6 +61,7 @@ const MatchComponent = ({
   }
 
   const clip = selectedRows && selectedRows[clipIndex]
+  const sorted = events.sort((a, b) => b.time - a.time)
   return (
     <Box
       maxWidth={1}
@@ -90,7 +91,7 @@ const MatchComponent = ({
               onSelectRows={setSelectedRows}
               selectedRows={selectedRows}
               seekAndPlayAll={seekAndPlayAll}
-              data={events}
+              data={sorted}
             />
           </CenteredBox>
         </Grid>

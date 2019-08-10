@@ -1,5 +1,4 @@
 import ApolloClient from "apollo-boost"
-console.log(process.env.NODE_ENV)
 const uri =
   process.env.NODE_ENV !== "development"
     ? "https://trackergraphql.herokuapp.com/graphql"
