@@ -5,7 +5,8 @@ const getPlayerInput = playerInput => ({
   name: playerInput.name,
   number: Number(playerInput.number),
   trackerID: playerInput.trackerID,
-  position: playerInput.position
+  position: playerInput.position,
+  row: Number(playerInput.row)
 })
 const TeamContainer = props => {
   const [activeModule, setActiveModule] = useState(0)

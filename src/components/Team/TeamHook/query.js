@@ -22,6 +22,7 @@ export const query = gql`
         number
         id
         trackerID
+        row
       }
     }
   }

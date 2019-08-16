@@ -7,6 +7,7 @@ export const updatePlayerMutation = gql`
       number
       trackerID
       position
+      row
     }
   }
 `
@@ -18,6 +19,7 @@ export const addPlayerMutation = gql`
       number
       trackerID
       position
+      row
     }
   }
 `

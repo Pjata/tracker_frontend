@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton"
 import Table from "../Table/Table"
 
 const PlayersTable = ({ data, onRowUpdate, onRowAdd, onRowDelete }) => {
-  console.log(data)
   return (
     <div style={{ maxWidth: "100%" }}>
       <Table
@@ -19,6 +18,7 @@ const PlayersTable = ({ data, onRowUpdate, onRowAdd, onRowDelete }) => {
         columns={[
           { title: "Name", field: "name" },
           { title: "Number", field: "number" },
+          { title: "Row", field: "row" },
           { title: "TrackerID", field: "trackerID" },
           {
             title: "Position",
