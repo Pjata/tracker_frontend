@@ -28,3 +28,35 @@ export const deletePlayerMutation = gql`
     deletePlayer(playerId: $playerId)
   }
 `
+
+export const addMatchMutation = gql`
+  mutation  addMatch($homeTeamId: ID!, $awayTeamId: ID!,$videoId: String,$date: Date) {
+    addMatch(homeTeamId: $homeTeamId, awayTeamId: $awayTeamId, videoId: $videoId, date: $date) {
+      homeTeam {
+        name
+      }
+      awayTeam {
+        name
+      }
+      id
+      videoId
+      date
+    }
+  }
+`
+
+export const updateMatchMutation = gql`
+  mutation  updateMatch($matchId: ID!, $videoId: String,$date: Date) {
+    updateMatch(matchId: $matchId, videoId: $videoId, date: $date) {
+      homeTeam {
+        name
+      }
+      awayTeam {
+        name
+      }
+      id
+      videoId
+      date
+    }
+  }
+`

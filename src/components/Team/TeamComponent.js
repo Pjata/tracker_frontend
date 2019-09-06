@@ -12,7 +12,7 @@ const modules = [
     title: "Games",
     icon: <Theaters />,
     component: props => (
-      <MatchesTable data={props.data.matches} key={props.index} />
+      <MatchesTable onRowAdd={props.onMatchAdd} onRowUpdate={props.onMatchUpdate} data={props.data.matches} key={props.index} />
     )
   },
   {

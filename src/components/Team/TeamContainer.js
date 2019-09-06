@@ -17,7 +17,9 @@ const TeamContainer = props => {
     data,
     updatePlayer,
     addPlayer,
-    deletePlayer
+    deletePlayer,
+    addMatch,
+    updateMatch
   ] = useTeamHook(props.match.params.id)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
@@ -48,6 +50,28 @@ const TeamContainer = props => {
       resolve()
     })
   }
+  const onMatchAdd = newData => {
+    return new Promise((resolve, reject) => {
+      addMatch({variables:{
+        ...newData,
+        homeTeamId: "5d43f02a08d1d35013f5b38b",
+        awayTeamId: "5d43f0bd08d1d35013f5b38c"
+      }})
+      console.log(newData)
+      resolve()
+    })
+  }
+  const onMatchUpdate = ({id,...rest}) => {
+    return new Promise((resolve, reject) => {
+      updateMatch({
+        variables: {
+          matchId: id,
+          ...rest
+        }
+      })
+      resolve()
+    })
+  }
   const onPlayerDelete = newData => {
     return new Promise((resolve, reject) => {
       const { id } = newData
@@ -63,6 +87,8 @@ const TeamContainer = props => {
     <TeamComponent
       data={team}
       activeModule={activeModule}
+      onMatchAdd={onMatchAdd}
+      onMatchUpdate={onMatchUpdate}
       setActiveModule={setActiveModule}
       onPlayerUpdate={onPlayerUpdate}
       onPlayerAdd={onPlayerAdd}

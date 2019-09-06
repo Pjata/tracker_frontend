@@ -5,24 +5,50 @@ import IconButton from "@material-ui/core/IconButton"
 import Table from "../Table/Table"
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline"
 
-const MatchesTable = ({ data }) => (
+const MatchesTable = ({ data, onRowAdd, onRowUpdate }) => (
   <div style={{ maxWidth: "100%" }}>
     <Table
+      editable={{
+        isEditable:()=>true,
+        onRowAdd,
+        onRowUpdate,
+      }}
       columns={[
         {
           title: "",
           field: "",
-          render: rowData => (
-            <Link to={`/app/match/${rowData.id}`}>
+          editable: "never",
+          render: rowData => {
+            if(!rowData){
+              return <div/>
+            }
+            return <Link to={`/app/match/${rowData.id}`}>
               <IconButton>
                 <PlayCircleOutline />
               </IconButton>
             </Link>
-          )
+          }
         },
-        { title: "Home team", field: "homeTeam.name" },
+        {
+          title: "Edit",
+          field: "",
+          editable: "never",
+          render: rowData => {
+            if(!rowData){
+              return <div/>
+            }
+            return <Link to={`/app/match/${rowData.id}`}>
+              <IconButton>
+                <PlayCircleOutline />
+              </IconButton>
+            </Link>
+          }
+        },
+        { title: "Home team", field: "homeTeam.name" , editable: "never" 
+      },
+        {title: "video id", field: "videoId"},
         { title: "Away team", field: "awayTeam.name" },
-        { title: "Date", field: "date", type: "date" }
+        { title: "Date", field: "date", type: "date", }
       ]}
       data={data}
       title="Games"

@@ -4,7 +4,9 @@ import { query } from "./query"
 import {
   updatePlayerMutation,
   addPlayerMutation,
-  deletePlayerMutation
+  deletePlayerMutation,
+  addMatchMutation,
+  updateMatchMutation
 } from "./mutations"
 
 export const useTeamHook = teamId => {
@@ -14,6 +16,8 @@ export const useTeamHook = teamId => {
     }
   })
   const [updatePlayer] = useMutation(updatePlayerMutation)
+  const [addMatch] = useMutation(addMatchMutation)
+  const [updateMatch] = useMutation(updateMatchMutation)
   const [addPlayer] = useMutation(addPlayerMutation, {
     update: (cache, { data: { addPlayer } }) => {
       const { team } = cache.readQuery({
@@ -44,7 +48,7 @@ export const useTeamHook = teamId => {
       })
     }
   })
-  return [loading, error, data, updatePlayer, addPlayer, deletePlayer]
+  return [loading, error, data, updatePlayer, addPlayer, deletePlayer, addMatch, updateMatch]
 }
 
 export default useTeamHook
