@@ -3,7 +3,7 @@ import TeamsComponent from "./TeamsComponent"
 import { useQuery } from "@apollo/react-hooks"
 import { gql } from "apollo-boost"
 
-const query = gql`
+export const query = gql`
   {
     teams {
       id

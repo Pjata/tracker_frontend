@@ -8,9 +8,11 @@ export const query = gql`
       matches {
         date
         homeTeam {
+          id
           name
         }
         awayTeam {
+          id
           name
         }
         id

@@ -1,4 +1,8 @@
 import ApolloClient from "apollo-boost"
+export const recorderUri =
+  process.env.NODE_ENV !== "development"
+    ? "https://trackerrecordernovideo.herokuapp.com"
+    : "http://localhost:3000"
 const uri =
   process.env.NODE_ENV !== "development"
     ? "https://trackergraphql.herokuapp.com/graphql"

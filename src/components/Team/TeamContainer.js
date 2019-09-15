@@ -55,13 +55,14 @@ const TeamContainer = props => {
       addMatch({variables:{
         ...newData,
         homeTeamId: "5d43f02a08d1d35013f5b38b",
-        awayTeamId: "5d43f0bd08d1d35013f5b38c"
+        awayTeamId: newData.awayTeam.id
       }})
       console.log(newData)
       resolve()
     })
   }
   const onMatchUpdate = ({id,...rest}) => {
+    debugger
     return new Promise((resolve, reject) => {
       updateMatch({
         variables: {
