@@ -8,11 +8,8 @@ import { Auth0Provider } from "./react-auth0-wrapper"
 import config from "./auth_config.json"
 import Profile from "./components/Profile"
 import PrivateRoute from "./components/PrivateRoute"
-import Teams from "./components/Teams/TeamsContainer"
-import Team from "./components/Team/TeamContainer"
-import Match from "./components/Match/MatchContainer"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-import TopMenu from "./components/TopMenu/TopMenu"
+import Main from "./components/Main"
 
 // A function that routes the user to the right place
 // after login
@@ -34,17 +31,11 @@ function App() {
       onRedirectCallback={onRedirectCallback}
     >
       <BrowserRouter>
-        <div>
-          <TopMenu />
           <Switch>
-            <Route exact path={"/"} component={Navbar} />
-            <Route exact path={"/app/teams"} component={Teams} />
-            <Route exact path={"/app/team/:id"} component={Team} />
-            <Route exact path={"/app/match/:id"} component={Match} />
             <PrivateRoute path={"/profile"} component={Profile} />
             <Route path={"/login"} component={Navbar} />
+            <PrivateRoute path={"/"} component={Main} />
           </Switch>
-        </div>
       </BrowserRouter>
     </Auth0Provider>
   )

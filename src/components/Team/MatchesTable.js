@@ -6,6 +6,7 @@ import Table from "../Table/Table"
 import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline"
 import {recorderUri} from "../../apollo/client"
 import TeamSelector from "../Teams/TeamSelector"
+import moment from "moment"
 
 const MatchesTable = ({ data, onRowAdd, onRowUpdate }) => (
   <div style={{ maxWidth: "100%" }}>
@@ -59,7 +60,12 @@ const MatchesTable = ({ data, onRowAdd, onRowUpdate }) => (
          }
 
         },
-        { title: "Date", field: "date", type: "date", }
+        { title: "Date", field: "date", type: "date",
+          defaultSort: 'desc',
+          render: rowData => {
+            return (rowData.date  && moment(rowData.date).format("YYYY.MM.DD")) || ""
+          }
+       }
       ]}
       data={data}
       title="Games"
