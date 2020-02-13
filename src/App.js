@@ -10,6 +10,7 @@ import Profile from "./components/Profile"
 import PrivateRoute from "./components/PrivateRoute"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Main from "./components/Main"
+import Report from './components/Report'
 
 // A function that routes the user to the right place
 // after login
@@ -32,9 +33,10 @@ function App() {
     >
       <BrowserRouter>
           <Switch>
-            <PrivateRoute path={"/profile"} component={Profile} />
+            <Route path={"/profile"} component={Profile} />
             <Route path={"/login"} component={Navbar} />
-            <PrivateRoute path={"/"} component={Main} />
+            <Route path={"/:matchId/report"} component={Report} />
+            <Route path={"/"} component={Main} />
           </Switch>
       </BrowserRouter>
     </Auth0Provider>
