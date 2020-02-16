@@ -14,6 +14,7 @@ import {
 import { distance, faceOffPositions, addFaceoffZone } from "./useReportHook";
 import { Label, Text, Rect, Image } from "react-konva";
 import IceRink from "../IceRink";
+import { filterWins } from "./FaceoffBasic";
 
 export default function FaceoffMap(props) {
   const { type, events, label } = props;
@@ -21,15 +22,17 @@ export default function FaceoffMap(props) {
   const filteredEvents = typeEvents(events);
 
   const eventsWithFaceoffZone = addFaceoffZone(filteredEvents);
+  const wins = filterWins(eventsWithFaceoffZone)
   console.log(eventsWithFaceoffZone);
   const toText = eventsWithFaceoffZone => (num, key, obj) => {
     const eventsForKey = filter(propEq("faceOffZone", key));
     const size = eventsForKey(eventsWithFaceoffZone);
+    const winSize = eventsForKey(wins);
     const dimensions = {
-      width: 30,
-      height: 30,
-      offsetX: 15,
-      offsetY: 15
+      width: 50,
+      height: 50,
+      offsetX: 25,
+      offsetY: 25
     };
     return (
       <>
@@ -43,7 +46,7 @@ export default function FaceoffMap(props) {
           strokeWidth="1px"
         />
         <Text
-          text={size.length}
+          text={`${winSize.length}/${size.length}`}
           fontSize={20}
           {...dimensions}
           x={num.x}

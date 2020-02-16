@@ -1,6 +1,10 @@
 import useGetMatchVideoInfo from "./useGetMatchVideoInfo";
-import { path, compose } from "ramda";
+import { path, compose, filter } from "ramda";
+const shotOutcome = path(["eventData", "shotOutcome"]);
 
+export const getShotOnGoalEvents = filter(
+  event => event.type === "SHOOT" && shotOutcome(event) === "SHOT_ON_GOAL"
+);
 const Left = value => ({
   map: _ => Left(value),
   chain: _ => Left(value),
@@ -73,6 +77,13 @@ const isEventTypeShowing = isEventPropertyIncludedInFilter(["type"]);
 const isPlayerShowing = isEventPropertyIncludedInFilter(["player", "id"]);
 const isInZone = isEventPropertyIncludedInFilter(["zone"]);
 
+export const filterEvents = events => filters => {
+  const isShowing = event =>
+    Right(event)
+      .chain(isEventInPeriod(filters.selectedPeriods))
+      .isRight();
+  return events.filter(isShowing);
+}
 const getEventsFiltered = matchVideoInfo => events => filters => {
   const isShowing = event =>
     Right(event)

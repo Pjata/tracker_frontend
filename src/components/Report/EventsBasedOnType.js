@@ -15,9 +15,9 @@ export default function EventsBasedOnType(props) {
   const eventsFiltered = typeEvents(events);
   const eventsByType = getEventsByType(eventsFiltered);
 
-  console.log(Object.keys(eventsByType))
+
   const rows = Object.keys(eventsByType).map(key => (
-    <TableRow>
+    <TableRow key={key}>
       <TableCell>{key}</TableCell>
       <TableCell>{eventsByType[key].length}</TableCell>
     </TableRow>
