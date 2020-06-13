@@ -28,6 +28,11 @@ const getTheme = () => {
 const theme = createMuiTheme({
   palette: {
     primary: { main: orange[700], dark: orange[900] }, // Purple and green play nicely together.
+    secondary: {
+      main: blueGrey[200],
+      dark: blueGrey[900],
+      light: deepOrange.A400,
+    },
     accent: {
       main: blueGrey[400],
       dark: blueGrey[900],
