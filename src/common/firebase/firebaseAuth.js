@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => {
     },
     paper: {
       width: "300px",
-      backgroundColor: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.accent.dark,
       height: "200px",
     },
     logoRoot: {
