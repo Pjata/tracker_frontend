@@ -10,9 +10,13 @@ const getWinRateLabel = type => (wins, eventsByPeriod) => {
   if (!(eventsByPeriod && eventsByPeriod[type])) {
     return "";
   }
-  return `${wins[type].length}/${eventsByPeriod[type].length}`;
+  return `${wins[type].length}/${eventsByPeriod[type].length} (${Math.round(
+    (wins[type].length / eventsByPeriod[type].length) * 100
+  )}%)`;
 };
-export const filterWins = filter(event => event.eventData.faceoffType === "WIN");
+export const filterWins = filter(
+  event => event.eventData.faceoffType === "WIN"
+);
 
 export default function FaceoffBasic(props) {
   const { type, events, label } = props;
@@ -30,7 +34,8 @@ export default function FaceoffBasic(props) {
         <TableRow>
           <TableCell>{label}</TableCell>
           <TableCell>
-            {winsOnly.length}/{eventsFiltered.length}
+            {winsOnly.length}/{eventsFiltered.length}{" "}
+            {`(${Math.round((winsOnly.length / eventsFiltered.length) * 100)}%)`}
           </TableCell>
         </TableRow>
       </TableHead>

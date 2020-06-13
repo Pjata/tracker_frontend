@@ -13,17 +13,6 @@ const addTeamMutation = gql`
 `;
 
 export const useAddTeamMutation = () => {
-  const [addTeam] = useMutation(addTeamMutation, {
-    update: (cache, { data: { addTeam } }) => {
-      const { teams } = cache.readQuery({
-        query
-      });
-      teams.push(addTeam);
-      cache.writeQuery({
-        query,
-        data: { teams }
-      });
-    }
-  });
+  const [addTeam] = useMutation(addTeamMutation)
   return addTeam
 };

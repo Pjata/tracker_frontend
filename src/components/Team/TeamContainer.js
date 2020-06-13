@@ -1,92 +1,92 @@
-import React, { useState } from "react"
-import TeamComponent from "./TeamComponent"
-import useTeamHook from "./TeamHook/useTeamHook"
-const getPlayerInput = playerInput => ({
+import React, { useState } from "react";
+import TeamComponent from "./TeamComponent";
+import useTeamHook from "./TeamHook/useTeamHook";
+const getPlayerInput = (playerInput) => ({
   name: playerInput.name,
   number: Number(playerInput.number),
   trackerID: playerInput.trackerID,
   position: playerInput.position,
-  row: Number(playerInput.row)
-})
-const TeamContainer = props => {
-  const [activeModule, setActiveModule] = useState(0)
-  console.log(props.match.params.id)
+  row: Number(playerInput.row),
+});
+const TeamContainer = (props) => {
+  const [activeModule, setActiveModule] = useState(0);
+  const teamId = props.match.params.id;
   const [
-    loading,
-    error,
     data,
     updatePlayer,
     addPlayer,
     deletePlayer,
     addMatch,
-    updateMatch
-  ] = useTeamHook(props.match.params.id)
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
-  const { team } = data
+    updateMatch,
+  ] = useTeamHook(props.match.params.id);
+
+  if (!data) return <p>Loading...</p>;
+
   const onPlayerUpdate = (newData, oldData) => {
     return new Promise((resolve, reject) => {
-      const { id, ...playerInput } = newData
+      const { id, ...playerInput } = newData;
       updatePlayer({
         variables: {
           playerId: id,
-          playerInput: getPlayerInput(playerInput)
-        }
-      })
-      resolve()
-    })
-  }
-  const onPlayerAdd = newData => {
+          playerInput: getPlayerInput(playerInput),
+        },
+      });
+      resolve();
+    });
+  };
+  const onPlayerAdd = (newData) => {
     return new Promise((resolve, reject) => {
-      const { id, ...playerInput } = newData
+      const { id, ...playerInput } = newData;
       addPlayer({
         variables: {
-          teamId: team.id,
+          teamId,
           playerInput: {
-            ...getPlayerInput(playerInput)
-          }
-        }
-      })
-      resolve()
-    })
-  }
-  const onMatchAdd = newData => {
+            ...getPlayerInput(playerInput),
+          },
+        },
+      });
+      resolve();
+    });
+  };
+  const onMatchAdd = (newData) => {
     return new Promise((resolve, reject) => {
-      addMatch({variables:{
-        ...newData,
-        homeTeamId: "5d43f02a08d1d35013f5b38b",
-        awayTeamId: newData.awayTeam.id
-      }})
-      console.log(newData)
-      resolve()
-    })
-  }
-  const onMatchUpdate = ({id,...rest}) => {
-    debugger
+      addMatch({
+        variables: {
+          ...newData,
+          homeTeamId: "5d43f02a08d1d35013f5b38b",
+          awayTeamId: newData.awayTeam.id,
+        },
+      });
+      console.log(newData);
+      resolve();
+    });
+  };
+  const onMatchUpdate = ({ id, ...rest }) => {
+    debugger;
     return new Promise((resolve, reject) => {
       updateMatch({
         variables: {
           matchId: id,
-          ...rest
-        }
-      })
-      resolve()
-    })
-  }
-  const onPlayerDelete = newData => {
+          ...rest,
+        },
+      });
+      resolve();
+    });
+  };
+  const onPlayerDelete = (newData) => {
     return new Promise((resolve, reject) => {
-      const { id } = newData
+      const { id } = newData;
       deletePlayer({
         variables: {
-          playerId: id
-        }
-      })
-      resolve()
-    })
-  }
+          playerId: id,
+        },
+      });
+      resolve();
+    });
+  };
   return (
     <TeamComponent
-      data={team}
+      data={data}
       activeModule={activeModule}
       onMatchAdd={onMatchAdd}
       onMatchUpdate={onMatchUpdate}
@@ -95,7 +95,7 @@ const TeamContainer = props => {
       onPlayerAdd={onPlayerAdd}
       onPlayerDelete={onPlayerDelete}
     />
-  )
-}
+  );
+};
 
-export default TeamContainer
+export default TeamContainer;

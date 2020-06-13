@@ -11,6 +11,8 @@ import PrivateRoute from "./components/PrivateRoute"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Main from "./components/Main"
 import Report from './components/Report'
+import { SignInScreen } from "./common/firebase/firebaseAuth"
+import Recorder from './recorder/index'
 
 // A function that routes the user to the right place
 // after login
@@ -25,21 +27,17 @@ const onRedirectCallback = appState => {
 }
 function App() {
   return (
-    <Auth0Provider
-      domain={config.domain}
-      client_id={config.clientId}
-      redirect_uri={window.location.origin}
-      onRedirectCallback={onRedirectCallback}
-    >
-      <BrowserRouter>
-          <Switch>
-            <Route path={"/profile"} component={Profile} />
-            <Route path={"/login"} component={Navbar} />
-            <Route path={"/:matchId/report"} component={Report} />
-            <Route path={"/"} component={Main} />
-          </Switch>
-      </BrowserRouter>
-    </Auth0Provider>
+    <BrowserRouter>
+        <Switch>
+          <Route path="/recorder">
+            <Recorder/>
+          </Route>
+          <Route path={"/profile"} component={Profile} />
+          <Route path={"/login"} component={SignInScreen} />
+          <Route path={"/:matchId/report"} component={Report} />
+          <Route path={"/"} component={Main} />
+        </Switch>
+    </BrowserRouter>
   )
 }
 

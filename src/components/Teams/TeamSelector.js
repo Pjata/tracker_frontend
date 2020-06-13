@@ -1,17 +1,15 @@
 import React from 'react'
 
-import { useQuery } from "@apollo/react-hooks"
-import {query} from "./TeamsContainer"
 import Select from "react-select"
+import { useTeams } from '../../common/hooks/useTeams';
 
 const TeamSelector = props => {
   const {value,onChange} = props
-  const { loading, error, data } = useQuery(query)
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error</p>
-  console.log(value)
+  const teams = useTeams()
+  if(!teams) {
+    return <div>Loading...</div>
+  }
 
-  const { teams } = data
   const options = teams.map(team => ({
     label: team.name,
     value: team.id

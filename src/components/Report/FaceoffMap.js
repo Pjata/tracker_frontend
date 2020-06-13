@@ -22,17 +22,17 @@ export default function FaceoffMap(props) {
   const filteredEvents = typeEvents(events);
 
   const eventsWithFaceoffZone = addFaceoffZone(filteredEvents);
-  const wins = filterWins(eventsWithFaceoffZone)
+  const wins = filterWins(eventsWithFaceoffZone);
   console.log(eventsWithFaceoffZone);
   const toText = eventsWithFaceoffZone => (num, key, obj) => {
     const eventsForKey = filter(propEq("faceOffZone", key));
     const size = eventsForKey(eventsWithFaceoffZone);
     const winSize = eventsForKey(wins);
     const dimensions = {
-      width: 50,
-      height: 50,
-      offsetX: 25,
-      offsetY: 25
+      width: 80,
+      height: 80,
+      offsetX: 40,
+      offsetY: 40
     };
     return (
       <>
@@ -46,7 +46,9 @@ export default function FaceoffMap(props) {
           strokeWidth="1px"
         />
         <Text
-          text={`${winSize.length}/${size.length}`}
+          text={`${winSize.length}/${size.length} (${Math.round(
+            (winSize.length / size.length) * 100
+          )}%)`}
           fontSize={20}
           {...dimensions}
           x={num.x}
