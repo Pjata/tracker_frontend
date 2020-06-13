@@ -40,7 +40,7 @@ const MatchesTable = ({ data, onRowAdd, onRowUpdate }) => (
             if(!rowData){
               return <div/>
             }
-            return <a href={`${recorderUri}/${rowData.id}/${rowData.videoId}`} rel="noopener noreferrer" target="_blank">
+            return <a href={`/recorder/${rowData.id}/${rowData.videoId}`} rel="noopener noreferrer" target="_blank">
               <IconButton>
                 <PlayCircleOutline />
               </IconButton>
