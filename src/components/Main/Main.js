@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "..//Navbar";
 import PrivateRoute from "../PrivateRoute";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 import TopMenu from "../TopMenu/TopMenu";
 import Teams from "../Teams/TeamsContainer";
 import Team from "../Team/TeamContainer";
@@ -10,18 +16,18 @@ import firebase from "../../common/firebase/firebase";
 
 export default function Main() {
   const [isUserLoading, setUserLoading] = useState(true);
-
+  let history = useHistory();
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       setUserLoading(false);
       if (!user) {
-        return <Redirect to="/login" />;
+        history.push("/login");
       }
     });
-  }, []);
+  }, [history]);
 
-  if(isUserLoading) {
-    return <div>Loading...</div>
+  if (isUserLoading) {
+    return <div>Loading...</div>;
   }
 
   return (

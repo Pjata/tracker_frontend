@@ -1,19 +1,15 @@
 import React from "react";
-import { useAuth0 } from "../react-auth0-wrapper";
+import firebase from '../common/firebase/firebase'
 
+const isAuthenticated = () => firebase.auth().currentUser
 const NavBar = () => {
-	const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+	const logout = () => firebase.auth().signOut()
 
 	return (
 		<div>
 			{!isAuthenticated && (
-				<button
-					onClick={() =>
-						loginWithRedirect({})
-					}
-				>
-					Log in
-				</button>
+				<button > Log in </button>
 			)}
 			{isAuthenticated && <button onClick={() => logout()}>Log out</button>}
 		</div>
