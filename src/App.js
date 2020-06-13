@@ -13,18 +13,6 @@ import Main from "./components/Main"
 import Report from './components/Report'
 import { SignInScreen } from "./common/firebase/firebaseAuth"
 import Recorder from './recorder/index'
-
-// A function that routes the user to the right place
-// after login
-const onRedirectCallback = appState => {
-  window.history.replaceState(
-    {},
-    document.title,
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.pathname
-  )
-}
 function App() {
   return (
     <BrowserRouter>

@@ -15,7 +15,7 @@ const modules = [
       <MatchesTable onRowAdd={props.onMatchAdd} onRowUpdate={props.onMatchUpdate} data={props.data.matches} key={props.index} />
     )
   },
- /* {
+ {
     title: "Players",
     icon: <Players />,
     component: props => (
@@ -27,7 +27,7 @@ const modules = [
         onRowDelete={props.onPlayerDelete}
       />
     )
-  } */
+  }
 ]
 
 const Title = ({ teamName }) => {

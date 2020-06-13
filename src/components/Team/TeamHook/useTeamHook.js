@@ -9,9 +9,12 @@ import {
   updateMatchMutation,
 } from "./mutations";
 import { useMatches } from "../../../common/hooks/useMatches";
+import { usePlayers } from "../../../common/hooks/usePlayers";
 
 export const useTeamHook = (teamId) => {
   const matches = useMatches(teamId);
+  const players = usePlayers(teamId)
+
   const [updatePlayer] = useMutation(updatePlayerMutation);
   const [addMatch] = useMutation(addMatchMutation);
   const [updateMatch] = useMutation(updateMatchMutation);
@@ -47,7 +50,8 @@ export const useTeamHook = (teamId) => {
       });
     },
   });
-  const data = matches && { matches, players: [] };
+  const data = (matches && players) && { matches, players };
+  console.log(players)
   return [
     data,
     updatePlayer,

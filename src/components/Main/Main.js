@@ -19,6 +19,7 @@ export default function Main() {
       }
     });
   }, []);
+
   if(isUserLoading) {
     return <div>Loading...</div>
   }
