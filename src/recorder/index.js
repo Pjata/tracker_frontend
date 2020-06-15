@@ -9,14 +9,17 @@ import {
 } from "react-router-dom";
 import EditorWithVideo from "./EditorWithVideo";
 import EventPlayback from "./EventPlayback";
+import EditorOnIce from './EditorOnIce';
 
 const RecorderApp = () => {
   let { path, url } = useRouteMatch();
   return (
     <Switch>
       <Route path={`${path}/:matchId/:videoId/playback`} component={EventPlayback} />
+      <Route path={`${path}/:matchId/:videoId/onice`} component={EditorOnIce} />
       <Route exact path={`${path}/:matchId/:videoId`} component={EditorWithVideo} />
       <Route exact path={`${path}/:matchId`} component={LiveRecoder} />
+
     </Switch>
   );
 };

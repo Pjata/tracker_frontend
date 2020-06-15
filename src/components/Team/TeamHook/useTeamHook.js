@@ -50,8 +50,8 @@ export const useTeamHook = (teamId) => {
       });
     },
   });
-  const data = (matches && players) && { matches, players };
-  console.log(players)
+  const data = (matches && players) && { matches, players, teamId };
+
   return [
     data,
     updatePlayer,

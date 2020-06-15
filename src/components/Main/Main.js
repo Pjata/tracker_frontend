@@ -13,6 +13,7 @@ import Teams from "../Teams/TeamsContainer";
 import Team from "../Team/TeamContainer";
 import Match from "../Match/MatchContainer";
 import firebase from "../../common/firebase/firebase";
+import Recorder from '../../recorder/index'
 
 export default function Main() {
   const [isUserLoading, setUserLoading] = useState(true);
@@ -37,6 +38,9 @@ export default function Main() {
         <Redirect exact from="/" to="/app/teams" />
         <Route exact path={"/app/teams"} component={Teams} />
         <Route exact path={"/app/team/:id"} component={Team} />
+        <Route path="/app/team/:teamId/recorder">
+          <Recorder />
+        </Route>
         <Route exact path={"/app/match/:id"} component={Match} />
       </Switch>
     </div>

@@ -12,14 +12,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Main from "./components/Main"
 import Report from './components/Report'
 import { SignInScreen } from "./common/firebase/firebaseAuth"
-import Recorder from './recorder/index'
 function App() {
   return (
     <BrowserRouter>
         <Switch>
-          <Route path="/recorder">
-            <Recorder/>
-          </Route>
           <Route path={"/profile"} component={Profile} />
           <Route path={"/login"} component={SignInScreen} />
           <Route path={"/:matchId/report"} component={Report} />

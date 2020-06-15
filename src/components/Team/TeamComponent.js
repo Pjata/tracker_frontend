@@ -1,24 +1,30 @@
-import React, { useMemo } from "react"
-import Drawer from "../Drawer/Drawer"
-import MatchesTable from "./MatchesTable"
-import Theaters from "@material-ui/icons/Theaters"
-import Players from "@material-ui/icons/AccessibilityNew"
-import PlayersTable from "./PlayersTable"
-import Breadcrumbs from "@material-ui/core/Breadcrumbs"
-import Link from "@material-ui/core/Link"
+import React, { useMemo } from "react";
+import Drawer from "../Drawer/Drawer";
+import MatchesTable from "./MatchesTable";
+import Theaters from "@material-ui/icons/Theaters";
+import Players from "@material-ui/icons/AccessibilityNew";
+import PlayersTable from "./PlayersTable";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
 
 const modules = [
   {
     title: "Games",
     icon: <Theaters />,
-    component: props => (
-      <MatchesTable onRowAdd={props.onMatchAdd} onRowUpdate={props.onMatchUpdate} data={props.data.matches} key={props.index} />
-    )
+    component: (props) => (
+      <MatchesTable
+        teamId={props.data.teamId}
+        onRowAdd={props.onMatchAdd}
+        onRowUpdate={props.onMatchUpdate}
+        data={props.data.matches}
+        key={props.index}
+      />
+    ),
   },
- {
+  {
     title: "Players",
     icon: <Players />,
-    component: props => (
+    component: (props) => (
       <PlayersTable
         data={props.data.players}
         key={props.index}
@@ -26,9 +32,9 @@ const modules = [
         onRowAdd={props.onPlayerAdd}
         onRowDelete={props.onPlayerDelete}
       />
-    )
-  }
-]
+    ),
+  },
+];
 
 const Title = ({ teamName }) => {
   return (
@@ -40,17 +46,17 @@ const Title = ({ teamName }) => {
         {teamName}
       </Link>
     </Breadcrumbs>
-  )
-}
+  );
+};
 
 const TeamComponent = ({ data, activeModule, setActiveModule, ...rest }) => {
   const moduleComps = modules.map(
     (module, index) =>
       activeModule === index && module.component({ index, data: data, ...rest })
-  )
-  const onModuleSelected = index => ev => {
-    setActiveModule(index)
-  }
+  );
+  const onModuleSelected = (index) => (ev) => {
+    setActiveModule(index);
+  };
   return (
     <Drawer
       activeModule={activeModule}
@@ -60,6 +66,6 @@ const TeamComponent = ({ data, activeModule, setActiveModule, ...rest }) => {
     >
       {moduleComps}
     </Drawer>
-  )
-}
-export default TeamComponent
+  );
+};
+export default TeamComponent;
