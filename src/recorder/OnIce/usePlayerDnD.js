@@ -47,7 +47,7 @@ export const usePlayerDnD = () => {
     const offSet = R.compose(
       R.sum,
       R.map((a) => a.length),
-      R.take(lineNum - 1),
+      R.take(lineNum),
       R.values
     )(lines);
 
@@ -130,15 +130,18 @@ export const usePlayerDnD = () => {
     />
   ));
 
+  console.log(playersOnIce);
+  console.log(lines);
   const mapToLineGroups = R.compose(
-    R.map((key) => {
+    R.addIndex(R.map)((key, index) => {
       const line = lines[key];
+      console.log(line);
       return (
         <LineGroup
-          key={line}
+          key={key}
           onClick={onAddAll}
           players={line}
-          droppableId={`onBench_${key}`}
+          droppableId={`onBench_${index}`}
           buttonLabel={`Line ${key}`}
         />
       );
