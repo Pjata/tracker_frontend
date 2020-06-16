@@ -3,7 +3,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const grid = 8;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
+const getItemStyleDefault = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
@@ -16,7 +16,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-const getListStyle = (isDraggingOver) => ({
+const getListStyleDefault = (isDraggingOver) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
   width: 250,
@@ -27,15 +27,17 @@ export const LineGroup = ({
   droppableId,
   players,
   onClick,
+  direction,
   buttonLabel = "Add",
+  getListStyle = getListStyleDefault,
+  getItemStyle = getItemStyleDefault,
 }) => (
-  <Droppable droppableId={droppableId}>
+  <Droppable droppableId={droppableId} direction={direction}>
     {(provided, snapshot) => (
       <div
         ref={provided.innerRef}
         style={getListStyle(snapshot.isDraggingOver)}
       >
-        <button onClick={onClick(players)}>{buttonLabel}</button>
         {players.map((item, index) => (
           <Draggable key={item.id} draggableId={item.id} index={index}>
             {(provided, snapshot) => (
